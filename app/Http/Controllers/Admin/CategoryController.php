@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function index()
     {
 
-        $category = Category::with(['parent'])->orderBy('created_at')->paginate(5);
+        $category = Category::with(['parent'])->orderBy('created_at', 'DESC')->paginate(5);
 
         $parent = Category::getParent()->orderBy('name', 'ASC')->get();
 
@@ -55,9 +55,9 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::withCount('child')->find($id);
+        $category = Category::withCount(['child', 'product'])->find($id);
 
-        if ($category->child_count == 0) {
+        if ($category->child_count == 0 && $category->product_count == 0) {
             $category->delete();
             return back()->with('success', 'Berhasil mengapus Data');
         }

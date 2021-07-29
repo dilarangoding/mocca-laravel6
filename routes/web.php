@@ -25,5 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
 
+    Route::resource('/product', 'Admin\ProductController');
+
     Route::resource('/category', 'Admin\CategoryController')->except(['create', 'show', 'edit']);
 });
