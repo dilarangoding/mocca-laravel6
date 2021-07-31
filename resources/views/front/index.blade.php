@@ -62,7 +62,12 @@
                   <div class="product-overlay">
                     <ul class="mb-0 list-inline">
                       <li class="list-inline-item m-0 p-0">
-                        <a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
+                        <form action="{{ route('front.cart') }}" method="post">
+                          @csrf
+                           <input type="hidden" value="{{ $product->id }}" name="product_id">
+                           <input type="hidden" value="1" name="qty">
+                           <button class="btn btn-sm btn-dark" type="submit">Add to cart</button>
+                        </form>
                       </li>
                       <li class="list-inline-item mr-0">
                         <a class="btn btn-sm btn-outline-dark DetailProduct"data-id={{ $product->id }} href="#productView" data-toggle="modal"> 
@@ -104,7 +109,7 @@
             <div class="d-inline-block">
               <div class="media align-items-end">
                 <svg class="svg-icon svg-icon-big svg-icon-light">
-                  <use xlink:href="#delivery-time-1"> </use>
+                    <use xlink:href="#delivery-time-1"> </use>
                 </svg>
                 <div class="media-body text-left ml-3">
                   <h6 class="text-uppercase mb-1">Pengiriman Cepat</h6>
@@ -152,8 +157,9 @@
   <script>
     $('.DetailProduct').on('click', function(){
       const id = $(this).data('id');
-      const img = "{{ asset('asset/produk/') }}"
-      const cart = "{{ url('/cart/') }}";
+      const img = "{{ asset('asset/produk/') }}";
+      const cart = "{{ route('front.cart') }}";
+      const token = "{{ csrf_token() }}";
 
       $.ajax({
         url:"{{ url('api/getProduct') }}",
@@ -169,10 +175,6 @@
                   <a class="product-view d-block h-100 bg-cover bg-center"
                   style="background: url(`+ bg +`)" href="` + img + '/' + product.image + `" data-lightbox="productview">
                   </a>
-                  <a class="d-none" href="` + img + '/' + product.image + `"  data-lightbox="productview">
-                  </a>
-                  <a class="d-none" href="` + img + '/' + product.image + `"  data-lightbox="productview">
-                  </a>
                 </div>
                 <div class="col-lg-6">
                   <button class="close p-4" type="button" data-dismiss="modal" aria-label="Close">
@@ -184,10 +186,13 @@
                     <p class="text-small mb-4">` + product.description +`</p>
                     <div class="row align-items-stretch mb-4">
                       <div class="col-md-12 pl-sm-0">
-                        <input class="form-control border-0 shadow-0 p-0" type="hidden" name="qty" value="1">
-                        <a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="` + cart +  '/' + id +`">
+                        <form action="` + cart +`" method="post">
+                        <input type="hidden" name="_token" value="` + token +`">
+                        <input type="hidden" name="qty" value="1">
+                        <input type="hidden" name="product_id" value="` + product.id +`">
+                        <button class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" >
                           Add to cart
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>

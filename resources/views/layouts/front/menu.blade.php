@@ -9,10 +9,10 @@
   </ul>
   <ul class="navbar-nav ml-auto">               
     <li class="nav-item">
-      <a class="nav-link" href="cart.html"> 
+      <a class="nav-link" href="{{ route('front.cart_list') }}"> 
         <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>
-        Cart
-        <small class="text-gray">(2)</small>
+        Kerajang
+        <small class="text-gray">({{ $carts }})</small>
       </a>
     </li>
     

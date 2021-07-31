@@ -18,6 +18,8 @@ class FrontController extends Controller
             ->limit(8)
             ->get();
 
+
+
         return view('front.index', compact('products'));
     }
 

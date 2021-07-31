@@ -8,11 +8,13 @@
     <div class="page-holder bg-light">
       <section class="py-5">
           <div class="container">
+            @if (session('success'))
+              <div class="alert alert-success"> {{ session('success') }}</div>
+            @endif
             <div class="row mb-5">
-  
+              
               <div class="col-lg-6">
                 <div class="row m-sm-0 justify-content-center">
-                  
                   <div class="col-sm-10 order-1 order-sm-2 ">
                     <div class="owl-carousel product-slider" data-slider-id="1">
                       <a class="d-block" href="{{ asset('asset/produk/'. $product->image) }}" data-lightbox="product" title="Product item 1">
@@ -25,24 +27,39 @@
               </div>
   
               <div class="col-lg-6">
-              
+                <ul class="list-inline mb-2">
+                  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                </ul>
                 <h1>{{ $product->name }}</h1>
                 <p class="text-muted lead">Rp {{ number_format($product->price) }}</p>
                 <p class="text-small mb-4">{!! $product->description !!}</p>
                 <div class="row align-items-stretch mb-4">
                   <div class="col-sm-5 pr-sm-0">
-                    <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white">
-                      <span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
-                      <div class="quantity">
-                        <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                        <input class="form-control border-0 shadow-0 p-0" type="text" name="qty" value="1">
-                        <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+                      <form action="{{ route("front.cart") }}" method="post">
+                        @csrf
+                      <input type="hidden" value="{{ $product->id }}" name="product_id">
+                      <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white">
+                        <span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
+                        <div class="quantity">
+                          <a href="#" class="dec-btn p-0 text-dark">
+                            <i class="fas fa-caret-left"></i>
+                          </a>
+                          <input class="form-control border-0 shadow-0 p-0" maxlength="7" type="text" name="qty" value="1">
+                          <a href="#" class="inc-btn p-0 text-dark">
+                            <i class="fas fa-caret-right"></i>
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-sm-3 pl-sm-0">
-                    <a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="#">Add to cart</a>
-                  </div>
+                    <div class="col-sm-3 pl-sm-0">
+                      <button type="submit" class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" >Add to cart</button>
+                    </form>
+                    </div>
+
                 </div>
                 <br>
                 <ul class="list-unstyled small d-inline-block">
