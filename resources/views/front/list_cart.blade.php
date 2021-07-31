@@ -25,9 +25,15 @@
   </section>
 
   <section class="py-5">
+
     @if (session('success'))
       <div class="alert alert-success">{{ session('success') }}</div>   
     @endif
+
+    @if (session('error'))
+      <div class="alert alert-danger">{{ session('error') }}</div>   
+    @endif
+
     <h2 class="h5 text-uppercase mb-4">Keranjang Belanja</h2>
     <form action="{{ route('front.update_cart') }}" method="post">
       @csrf
@@ -55,9 +61,8 @@
                   </th>
                 </tr>
               </thead>
+              <tbody>
               @forelse ($carts as $item)
-               
-                <tbody>
                 <tr>
                   <th class="pl-0 border-0" scope="row">
                     <div class="media align-items-center">
@@ -101,26 +106,25 @@
                     </a>
                     
                   </td>
-                </tr>
-              </tbody>
+                </tr> 
               @empty
               <tr>
                 <td colspan="4" class="text-center">Keranjang Anda Kosong Yuk Segera Belanja</td>
               </tr>
               @endforelse
-            
+            </tbody>
             </table>
           </div>
     
           <div class="bg-light px-4 py-3">
             <div class="row align-items-center text-center">
               <div class="col-md-6 mb-3 mb-md-0 text-md-left">
-                  <button class="btn btn-dark">Update Cart</button>
+                  <button class="btn btn-dark">Update Keranjang</button>
               </div>
               <div class="col-md-6 text-md-right">
                 <a class="btn btn-outline-dark btn-sm" href="{{ route('front.product') }}">
                   <i class="fas fa-long-arrow-alt-left mr-2"></i>
-                  Continue shopping
+                  Lanjut Belanja
                 </a>
 
               </div>
@@ -142,8 +146,8 @@
                   <strong class="text-uppercase small font-weight-bold">Total</strong>
                   <span><b>Rp {{ number_format($subtotal) }}</b></span></li>
                 <li>
-                  <a class="btn btn-outline-dark btn-block btn-sm" href="checkout.html">
-                    Procceed to checkout
+                <a class="btn btn-outline-dark btn-block btn-sm" href="{{ route("front.checkout") }}">
+                    Checkout Sekarang
                     <i class="fas fa-long-arrow-alt-right ml-2"></i>
                   </a>
                 </li>

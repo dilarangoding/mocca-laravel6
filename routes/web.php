@@ -14,6 +14,12 @@ Route::group(['prefix' => 'cart'], function () {
     Route::put('/', 'TransactionController@updateCart')->name('front.update_cart');
     Route::get('/{cart}', 'TransactionController@deleteCart')->name('front.delete_cart');
 });
+
+Route::group(['prefix' => 'checkout'], function () {
+    Route::get('/', 'TransactionController@checkout')->name('front.checkout');
+    Route::post('/', 'TransactionController@prosesCheckout')->name('front.prosesCheckout');
+    Route::get('/{invoice}', 'TransactionController@checkoutFinish')->name('front.finish_checkout');
+});
 // EndFront
 
 

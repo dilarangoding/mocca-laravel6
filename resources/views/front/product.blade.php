@@ -25,7 +25,7 @@
   <section class="py-5">
     <div class="container p-0">
       <div class="row">
-        <div class="col lg-3 order-2 order-lg-1">
+        <div class="col lg-3 order-lg-1 order-sm-1">
           <a href="{{ route('front.product') }}" class="text-dark">
             <h5 class="text-uppercase mb-4">Kategori</h5>
           </a>
@@ -45,7 +45,7 @@
             @endforeach
               
         </div>
-        <div class="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
+        <div class="col-lg-9  order-lg-2 order-sm-2 mb-5 mb-lg-0">
           <div class="row">
             @forelse ($products as $product)
               <div class="col-xl-3 col-lg-4 col-sm-6">

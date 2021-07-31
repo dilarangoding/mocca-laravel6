@@ -16,11 +16,33 @@
       </a>
     </li>
     
-    <li class="nav-item">
-      <a class="nav-link" href="{{ route('login') }}"> 
-        <i class="fas fa-user-alt mr-1 text-gray"></i>
-        Login
-      </a>
-    </li>
+    @if (auth()->check())
+   
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user-alt mr-1 text-gray"></i>
+           {{ auth()->user()->name }}
+        </a>
+        <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item border-0 transition-link" href="#">Dashboard</a>
+          <a class="dropdown-item border-0 transition-link"  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+          </a>
+           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </div>
+      </li>
+
+    @else    
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('login') }}"> 
+          <i class="fas fa-user-alt mr-1 text-gray"></i>
+          Login
+        </a>
+      </li>
+    @endif
+
+
   </ul>
 </div>
