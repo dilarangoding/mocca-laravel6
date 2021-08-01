@@ -146,10 +146,14 @@
                   <strong class="text-uppercase small font-weight-bold">Total</strong>
                   <span><b>Rp {{ number_format($subtotal) }}</b></span></li>
                 <li>
-                <a class="btn btn-outline-dark btn-block btn-sm" href="{{ route("front.checkout") }}">
-                    Checkout Sekarang
-                    <i class="fas fa-long-arrow-alt-right ml-2"></i>
+                @if ($carts != NULL)
+                  <a class="btn btn-outline-dark btn-block btn-sm" href="{{ route("front.checkout") }}">
+                      Checkout Sekarang
+                      <i class="fas fa-long-arrow-alt-right ml-2"></i>
                   </a>
+                @else
+                  
+                @endif
                 </li>
               </ul>
             </div>

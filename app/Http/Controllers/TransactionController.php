@@ -16,6 +16,7 @@ use App\Customer;
 use App\District;
 use App\OrderDetail;
 use App\Order;
+use phpDocumentor\Reflection\Types\Null_;
 
 class TransactionController extends Controller
 {
@@ -111,7 +112,9 @@ class TransactionController extends Controller
 
     public function checkout()
     {
-        if (auth()->check()) {
+        $carts = $this->getCarts();
+
+        if (auth()->check() && $carts != NULL) {
             $provinces = Province::orderBy('created_at', 'DESC')->get();
             $carts     = $this->getCarts();
             $subtotal  = $this->getSubtotal();
@@ -119,7 +122,7 @@ class TransactionController extends Controller
             return view('front.checkout', compact('provinces', 'carts', 'subtotal'));
         }
 
-        return back()->with('error', 'Silahkan Login Terlebih Dahulu');
+        return ($carts == null ? back()->with('error', 'Keranjang Anda Masih Kosong') : back()->with('error', 'Silahkan Login Terlebih Dahulu'));
     }
     public function getCity()
     {
