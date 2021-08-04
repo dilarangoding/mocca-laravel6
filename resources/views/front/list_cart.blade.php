@@ -118,9 +118,11 @@
     
           <div class="bg-light px-4 py-3">
             <div class="row align-items-center text-center">
+              @if ($carts != null)
               <div class="col-md-6 mb-3 mb-md-0 text-md-left">
                   <button class="btn btn-dark">Update Keranjang</button>
               </div>
+              @endif
               <div class="col-md-6 text-md-right">
                 <a class="btn btn-outline-dark btn-sm" href="{{ route('front.product') }}">
                   <i class="fas fa-long-arrow-alt-left mr-2"></i>
@@ -150,9 +152,7 @@
                   <a class="btn btn-outline-dark btn-block btn-sm" href="{{ route("front.checkout") }}">
                       Checkout Sekarang
                       <i class="fas fa-long-arrow-alt-right ml-2"></i>
-                  </a>
-                @else
-                  
+                  </a>                 
                 @endif
                 </li>
               </ul>

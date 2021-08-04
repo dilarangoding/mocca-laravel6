@@ -25,7 +25,7 @@
   <section class="py-5">
     <div class="container p-0">
       <div class="row">
-        <div class="col lg-3 order-lg-1 order-sm-1">
+        <div class="col-lg-3 order-lg-1 order-sm-1">
           <a href="{{ route('front.product') }}" class="text-dark">
             <h5 class="text-uppercase mb-4">Kategori</h5>
           </a>

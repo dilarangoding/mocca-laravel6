@@ -24,7 +24,7 @@
            {{ auth()->user()->name }}
         </a>
         <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item border-0 transition-link" href="#">Dashboard</a>
+          <a class="dropdown-item border-0 transition-link" href="{{ route('customer.dashboard') }}">Dashboard</a>
           <a class="dropdown-item border-0 transition-link"  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             Logout
           </a>

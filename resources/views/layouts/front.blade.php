@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/custom.css')}}">
     <!-- Favicon-->
     <link rel="shortcut icon" href="{{ asset('front/img/favicon.png')}}">
-    @yield('name')
+    @yield('css')
   </head>
   <body>
     <div class="page-holder">

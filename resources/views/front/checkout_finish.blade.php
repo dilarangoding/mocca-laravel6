@@ -10,7 +10,7 @@
       <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
         <div class="col-lg-12 text-center ">
           <h1 class="h2 text-uppercase mb-5">Pesanan Selesai</h1>
-          <h4>Silahkan untuk melakukan konfirmasi pembayaran atau klik <a href="#">disini</a> sebelum </h4>
+          <h4>Silahkan untuk melakukan konfirmasi pembayaran atau klik <a href="{{ url('/payment?invoice=' . $order->invoice) }}">disini</a> sebelum </h4>
           <br>
           <h4>14:54  1 Agustus 2021  </h4>
         </div>
@@ -60,7 +60,7 @@
         <i class="fas fa-long-arrow-alt-left mr-2"></i>
         Lanjut Belanja
       </a>
-       <a class="btn btn-outline-dark btn-sm ml-5" href="{{ route('front.product') }}">
+       <a class="btn btn-outline-dark btn-sm ml-5" href="{{ url('/payment?invoice=' . $order->invoice) }}">
         Konfirmasi pembayaran
         <i class="fas fa-long-arrow-alt-right mr-2"></i>
       </a>

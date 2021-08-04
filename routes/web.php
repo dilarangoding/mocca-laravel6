@@ -27,9 +27,23 @@ Auth::routes();
 
 Route::get('logout', 'Auth\LoginController@logout');
 
-Route::group(['middleware' => ['auth', 'CheckRole:customer']], function () { });
+// Customer
+Route::group(['middleware' => ['auth', 'CheckRole:customer']], function () {
+    Route::get('/dashboard', 'DashboardController@dashboard')->name("customer.dashboard");
 
+    Route::get('/pesanan', 'OrderController@index')->name('customer.order');
+    Route::get('/pesanan/{invoice}', 'OrderController@detailOrder')->name('customer.detail_order');
+
+    Route::get('/payment', 'OrderController@payment')->name('customer.payment');
+    Route::post('/payment', 'OrderController@paymentStore')->name("customer.payment_store");
+});
+
+
+
+
+// Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'CheckRole:admin']], function () {
+
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
 
     Route::resource('/product', 'Admin\ProductController');

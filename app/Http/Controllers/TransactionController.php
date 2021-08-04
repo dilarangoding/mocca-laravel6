@@ -92,19 +92,17 @@ class TransactionController extends Controller
 
         $cookie = cookie('mocca-carts', json_encode($carts), 2880);
 
-        return back()->cookie($cookie)->with('success', 'Berhasil Memperbaharui Keranjang ');
+        return back()->cookie($cookie)->with('success', 'Berhasil Memperbarui Keranjang ');
     }
 
     public function deleteCart($id)
     {
+        $carts = $this->getCarts();
 
-        if (Product::where('id', $id)->exists()) {
-
-            $carts = $this->getCarts();
+        if (Product::where('id', $id)->exists() && $carts != null) {
             unset($carts[$id]);
-
             $cookie = cookie('mocca-carts', json_encode($carts), 2880);
-            return back()->cookie($cookie)->with('success', 'Berhasil Memperbaharui Keranjang ');
+            return back()->cookie($cookie)->with('success', 'Berhasil Memperbarui Keranjang ');
         }
 
         return back();
