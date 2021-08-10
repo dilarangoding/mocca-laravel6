@@ -52,4 +52,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'CheckRole:admin']],
     Route::resource('/product', 'Admin\ProductController');
 
     Route::resource('/category', 'Admin\CategoryController')->except(['create', 'show', 'edit']);
+
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', 'Admin\OrderController@index')->name('orders.index');
+        Route::post('/', 'Admin\OrderController@shippingOrder')->name('orders.tracking_number');
+        Route::get('/{invoice}', 'Admin\OrderController@detail')->name('orders.detail');
+        Route::get('/accept_payment/{id}', 'Admin\OrderController@acceptPayment');
+        Route::delete('/{id}', 'Admin\OrderController@destroy')->name('orders.destroy');
+    });
 });

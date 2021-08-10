@@ -12,7 +12,7 @@
     <div class="container">
       <div class="row">
         <h2>Hai, {{ $order->customer_name }}</h2>
-        <h3>Silahkan untuk melakukan konfirmasi pembayaran di menu pembayaran atau klik <a href="#">disini</a></h3>
+        <h3>Silahkan untuk melakukan konfirmasi pembayaran di menu pesanan atau klik <a href="{{ route('customer.order') }}">disini</a></h3>
       </div>
     </div>
     </div>

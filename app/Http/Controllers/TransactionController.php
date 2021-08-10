@@ -160,6 +160,7 @@ class TransactionController extends Controller
             $subtotal = $this->getSubtotal();
 
             $customer = Customer::find(auth()->user()->customer->id);
+
             if ($customer->status == false) {
                 $customer->update([
                     'address'     => $req->customer_address,

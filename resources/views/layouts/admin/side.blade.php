@@ -35,6 +35,15 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ route('orders.index') }}" class="nav-link {{Request::path()==='admin/orders'?'active':''}} ">
+              <i class="fas fa-box  nav-icon "></i>
+              <p>
+                Pesanan
+              </p>
+            </a>
+          </li>
     
         </ul>
       </nav>
