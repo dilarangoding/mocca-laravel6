@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 // Models
 use App\Product;
 use App\Category;
-
+use App\Customer;
+use App\Province;
 
 class FrontController extends Controller
 {
@@ -62,5 +63,42 @@ class FrontController extends Controller
             ->get();
 
         return view("front.detail_product", compact('product', 'related'));
+    }
+
+    public function settingForm()
+    {
+        $customer  = auth()->user()->customer->load('district');
+        $provinces = Province::orderBy('name', 'ASC')->get();
+
+        return view('front.setting', compact('customer', 'provinces'));
+    }
+
+    public function customerUpdateProfile(Request $req)
+    {
+        $this->validate($req, [
+            'name'          => 'required|string|max:100',
+            'phone_number'  => 'required|max:15',
+            'address'       => 'required|string',
+            'district_id'   => 'required|exists:districts,id',
+            'password'      => 'nullable|string|min:8',
+        ]);
+
+        try {
+            $user = auth()->user();
+            $pw   = !empty($req->password) ? bcrypt($req->password) : $user->password;
+
+            Customer::where('id', $user->customer->id)->update([
+                'name'         => $req->name,
+                'phone_number' => $req->phone_number,
+                'address'      => $req->address,
+                'district_id'  => $req->district_id
+            ]);
+
+            $user->update(['password' => $pw]);
+
+            return back()->with('success', 'Data Berhasil Diperbarui');
+        } catch (\Exception $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 }

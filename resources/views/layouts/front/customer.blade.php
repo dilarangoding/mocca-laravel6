@@ -13,7 +13,7 @@
         </a>
       </li>
       <li class="list-group-item bg-light ">
-        <a href="#" class="text-dark">
+        <a href="{{ route('customer.settingForm') }}" class="{{ Request::path() === 'setting' ? '' : 'text-dark' }} ">
           Pengaturan
         </a>
       </li>

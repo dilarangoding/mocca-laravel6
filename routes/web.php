@@ -36,6 +36,9 @@ Route::group(['middleware' => ['auth', 'CheckRole:customer']], function () {
 
     Route::get('/payment', 'OrderController@payment')->name('customer.payment');
     Route::post('/payment', 'OrderController@paymentStore')->name("customer.payment_store");
+
+    Route::get('setting', 'FrontController@settingForm')->name('customer.settingForm');
+    Route::post('setting', 'FrontController@customerUpdateProfile')->name('customer.setting');
 });
 
 
