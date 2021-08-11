@@ -59,7 +59,7 @@
         <div class="info-box mb-3">
           <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
           <div class="info-box-content">
-            <span class="info-box-text">Pelanggan Baru (H+7)</span>
+            <span class="info-box-text">Pelanggan Baru (H-7)</span>
             <span class="info-box-number">{{ $customer }}</span>
           </div>
         </div>

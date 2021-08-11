@@ -11,12 +11,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
 
 
-    public function customer()
-    {
-        return $this->hasOne(Customer::class);
-    }
-
-
     protected $fillable = [
         'role', 'customer_id', 'name', 'email', 'password',
     ];
@@ -29,4 +23,18 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class);
+    }
+
+    public function getVerifyLabelAttribute()
+    {
+        if ($this->email_verified_at == Null) {
+            return '<span class="badge badge-secondary">Belum Terverifikasi</span>';
+        }
+
+        return '<span class="badge badge-success">Sudah Terverifikasi</span>';
+    }
 }

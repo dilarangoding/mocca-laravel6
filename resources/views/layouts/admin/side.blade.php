@@ -44,6 +44,24 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ route('customers.index') }}" class="nav-link {{Request::path()==='admin/customers'?'active':''}} ">
+              <i class="fas fa-users  nav-icon "></i>
+              <p>
+                Pelanggan
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('report.index') }}" class="nav-link {{Request::path()==='admin/laporan'?'active':''}} ">
+              <i class="fas fa-clipboard  nav-icon "></i>
+              <p>
+                Laporan
+              </p>
+            </a>
+          </li>
     
         </ul>
       </nav>

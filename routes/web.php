@@ -68,4 +68,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'CheckRole:admin']],
         Route::get('/return/{invoice}', 'Admin\OrderController@return')->name('orders.return');
         Route::post('/return', 'Admin\OrderController@approveReturn')->name('orders.approve_return');
     });
+
+    Route::get('/customers', 'Admin\CustomerController@index')->name('customers.index');
+    Route::delete('/customers/{id}', 'Admin\CustomerController@destroy')->name('customers.destroy');
+
+    Route::get('laporan', 'HomeController@orderReport')->name('report.index');
+    Route::get('laporan/pdf/{daterange}', 'HomeController@orderReportPdf')->name('report.order_pdf');
 });
