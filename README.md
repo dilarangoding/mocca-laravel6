@@ -27,7 +27,7 @@ Mocca.id adalah personal projek E-commerce untuk  menjual produk jam buatan tang
 
 ## Screenshot Halaman Customer
 <br>
-<p align="center"><a href="https://raw.githubusercontent.com/dilarangoding/test-repo/main/img/Mocca-id.png" target="_blank"><img src="https://raw.githubusercontent.com/dilarangoding/test-repo/main/img/Mocca-id.png" width="400" ></a></p>
+<p align="center"><a href="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/front/Mocca-id.png" target="_blank"><img src="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/front/Mocca-id.png" width="600" ></a></p>
 
 <p align="center">
 <span>Halaman Beranda</span>
@@ -35,7 +35,7 @@ Mocca.id adalah personal projek E-commerce untuk  menjual produk jam buatan tang
 
 <br>
 
-<p align="center"><a href="https://raw.githubusercontent.com/dilarangoding/test-repo/main/img/Keranjang-Belanja.png" target="_blank"><img src="https://raw.githubusercontent.com/dilarangoding/test-repo/main/img/Keranjang-Belanja.png" width="400" ></a></p>
+<p align="center"><a href="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/front/Keranjang-Belanja.png" target="_blank"><img src="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/front/Keranjang-Belanja.png" width="600" ></a></p>
 
 <p align="center">
 <span>Halaman Keranjang</span>
@@ -45,7 +45,7 @@ Mocca.id adalah personal projek E-commerce untuk  menjual produk jam buatan tang
 
 ## Screenshot Halaman Admin
 <br>
-<p align="center"><a href="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/admin/Dashboard-Admin.png" target="_blank"><img src="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/admin/Dashboard-Admin.png" width="400" ></a></p>
+<p align="center"><a href="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/admin/Dashboard-Admin.png" target="_blank"><img src="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/admin/Dashboard-Admin.png" width="600" ></a></p>
 
 <p align="center">
 <span>Halaman Dashboard</span>
@@ -53,7 +53,7 @@ Mocca.id adalah personal projek E-commerce untuk  menjual produk jam buatan tang
 
 <br>
 
-<p align="center"><a href="https://raw.githubusercontent.com/dilarangoding/test-repo/main/img/Produk.png" target="_blank"><img src="https://raw.githubusercontent.com/dilarangoding/test-repo/main/img/Produk.png" width="400" ></a></p>
+<p align="center"><a href="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/admin/Produk.png" target="_blank"><img src="https://raw.githubusercontent.com/dilarangoding/mocca-laravel6/main/public/ss/admin/Produk.png" width="600" ></a></p>
 
 <p align="center">
 <span>Halaman Produk</span>
