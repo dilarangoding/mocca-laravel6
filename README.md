@@ -61,4 +61,9 @@ Mocca.id adalah personal projek E-commerce untuk  menjual produk jam buatan tang
 
 <br>
 
+######  Sumber Daya
+- https://adminlte.io/themes/v3/
+- https://bootstraptemple.com
+- http://fontawesome.io/
+
 
