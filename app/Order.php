@@ -28,6 +28,11 @@ class Order extends Model
         return $this->hasOne(Payment::class);
     }
 
+    public function return()
+    {
+        return $this->hasOne(OrderReturn::class);
+    }
+
 
     public function getStatusLabelAttribute()
     {

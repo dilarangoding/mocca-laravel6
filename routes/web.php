@@ -33,6 +33,9 @@ Route::group(['middleware' => ['auth', 'CheckRole:customer']], function () {
 
     Route::get('/pesanan', 'OrderController@index')->name('customer.order');
     Route::get('/pesanan/{invoice}', 'OrderController@detailOrder')->name('customer.detail_order');
+    Route::post('/pesanan', 'OrderController@acceptOrder')->name('customer.order_accept');
+    Route::get('/pesanan/return/{invoice}', 'OrderController@returnForm')->name('customer.order_return');
+    Route::put('/pesanan/return{id}', 'OrderController@proccessReturn')->name('customer.return');
 
     Route::get('/payment', 'OrderController@payment')->name('customer.payment');
     Route::post('/payment', 'OrderController@paymentStore')->name("customer.payment_store");
@@ -59,5 +62,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'CheckRole:admin']],
         Route::get('/{invoice}', 'Admin\OrderController@detail')->name('orders.detail');
         Route::get('/accept_payment/{id}', 'Admin\OrderController@acceptPayment');
         Route::delete('/{id}', 'Admin\OrderController@destroy')->name('orders.destroy');
+        Route::get('/return/{invoice}', 'Admin\OrderController@return')->name('orders.return');
+        Route::post('/return', 'Admin\OrderController@approveReturn')->name('orders.approve_return');
     });
 });

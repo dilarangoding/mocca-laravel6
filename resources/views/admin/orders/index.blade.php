@@ -98,7 +98,16 @@
                       </td>
                       <td>Rp {{ number_format($item->subtotal) }}</td>
                       <td>{{ $item->created_at->format('d-m-Y') }}</td>
-                      <td>{!! $item->status_label !!}</td>
+                      <td>
+                        {!! $item->status_label !!} <br>
+                        @if ($item->return_count > 0 )
+                        <a href="{{ route('orders.return', $item->invoice) }}">
+                          <span class="badge badge-danger">
+                            Permintaan return
+                          </span>
+                        </a> 
+                        @endif
+                      </td>
                       <td>
                         <form action="{{ route("orders.destroy", $item->id) }}" method="post">
                           @csrf

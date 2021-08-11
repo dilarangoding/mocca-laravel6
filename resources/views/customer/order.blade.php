@@ -25,6 +25,9 @@
         <div class="col-lg-9 order-2">
          <div class="row">
            <div class="col-md-12">
+             @if (session('success'))
+                 <div class="alert alert-success">{{ session("success") }}</div>
+             @endif
              <div class="card">
 
                <div class="card-header">
@@ -58,7 +61,20 @@
                            @if ($item->status == 0)
                               <a href="{{ url('/payment?invoice=' . $item->invoice) }}" class="btn btn-info btn-sm">Konfirmasi</a>
                            @endif
-                           <a href="#" data-id="{{ $item->invoice }}" class="btn btn-dark btn-sm btn-rounded  detail">Detail</a>
+                           <form action="{{ route('customer.order_accept') }}" method="POST" onsubmit="return confirm('Sudah yakin barang nya sesuai?')">
+                            @csrf
+
+                            <input type="hidden" name="order_id" value="{{ $item->id }}">
+                            @if ($item->status == 3 && $item->return_count == 0)
+                            <button class="btn btn-sm btn-success">Terima Barang</button>  
+                            
+                            <a href="{{ route('customer.order_return', $item->invoice) }}" class="btn btn-sm btn-danger">Return</a>
+                            @endif
+
+                            <a href="#" data-id="{{ $item->invoice }}" class="btn btn-dark btn-sm btn-rounded  detail">Detail</a>
+
+
+                           </form>
                          </td>
                        </tr>
                        @empty

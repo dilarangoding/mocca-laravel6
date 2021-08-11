@@ -15,7 +15,9 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with(["customer.district.city.province"])->orderBy('created_at', 'DESC');
+        $orders = Order::with(["customer.district.city.province"])
+            ->withCount(['return'])
+            ->orderBy('created_at', 'DESC');
 
         if (request()->q != '') {
             $orders = $orders->where(function ($q) {
@@ -76,5 +78,28 @@ class OrderController extends Controller
         $order->delete();
 
         return back()->with('success', 'Data Berhasil dihapus');
+    }
+
+    public function return($invoice)
+    {
+        $order = Order::with(['return', 'customer'])->where('invoice', $invoice)->first();
+
+        return view('admin.orders.return', compact('order'));
+    }
+
+    public function approveReturn(Request $req)
+    {
+        $this->validate($req, [
+            'status' => 'required',
+        ]);
+
+        $order = Order::find($req->order_id);
+
+        $order->return()->update([
+            'status'  => $req->status
+        ]);
+        $order->update(['status' => 4]);
+
+        return back()->with('success', 'Berhasil');
     }
 }

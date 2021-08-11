@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 // models
 
 use App\Order;
+use App\OrderReturn;
 use App\Payment;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('customer_id', auth()->user()->customer->id)
+        $orders = Order::withCount(['return'])->where('customer_id', auth()->user()->customer->id)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
 
@@ -60,7 +62,7 @@ class OrderController extends Controller
 
             $order = Order::where('invoice', $req->invoice)->first();
 
-            if ($req->amount < $order->subtotal) {
+            if ($req->amount != $order->subtotal) {
                 return back()->with('error', 'Jumlah Transfer Kurang Dari Tagihan Pemesanan');
             }
 
@@ -88,6 +90,56 @@ class OrderController extends Controller
         } catch (\Exception $th) {
             DB::rollback();
             return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function acceptOrder(Request $req)
+    {
+        $order = Order::find($req->order_id);
+        if ($order->where("customer_id", auth()->user()->customer->id)->exists()) {
+            $order->update(['status' => 4]);
+
+            return back()->with('success', 'Pesanan Anda Selesai');
+        }
+
+        return back()->with('error', 'Bukan Pesanan Anda');
+    }
+
+    public function returnForm($invoice)
+    {
+        $order = Order::where('invoice', $invoice)
+            ->where('customer_id', Auth::user()->customer->id)
+            ->first();
+
+        return view('customer.return', compact('order'));
+    }
+
+    public function proccessReturn(Request $req, $id)
+    {
+        $this->validate($req, [
+            'reason'           => 'required|string',
+            'refund_transfer'  => 'required|string',
+            'photo'            => 'required|image|mimes:png, jpg, jpeg',
+        ]);
+
+        $returnOrder = OrderReturn::where('order_id', $id)->first();
+
+        if ($returnOrder) return back()->with('error', 'Permintaan Refund Dalam Prosses');
+
+        if ($req->hasFile('photo')) {
+            $file     = $req->file('photo');
+            $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+            $file->move('asset/return', $filename);
+
+            OrderReturn::create([
+                'order_id'        => $id,
+                'photo'           => $filename,
+                'reason'          => $req->reason,
+                'refund_transfer' => $req->refund_transfer,
+                'status'          => 0,
+            ]);
+
+            return back()->with('success', 'Permintan Refund Pesanan Berhasil Dikirim');
         }
     }
 }
