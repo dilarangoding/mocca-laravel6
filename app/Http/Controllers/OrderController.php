@@ -139,7 +139,37 @@ class OrderController extends Controller
                 'status'          => 0,
             ]);
 
+            $order = Order::find($id);
+
+            $this->sendMessage('#' . $order->invoice, $req->reason);
+
             return back()->with('success', 'Permintan Refund Pesanan Berhasil Dikirim');
+        }
+    }
+
+    private function getTelegram($url, $params)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url . $params);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        $content = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($content, true);
+    }
+
+    private function sendMessage($invoice, $reason)
+    {
+
+        $key = env('TELEGRAM_KEY');
+
+        $chat = $this->getTelegram('https://api.telegram.org/' . $key . '/getUpdates', '');
+        if ($chat['ok']) {
+            $chat_id = $chat['result'][0]['message']['chat']['id'];
+            $text = "Hai Mocca.id ada yang return barang nih segera dicek ya!";
+            $chat = $this->getTelegram('https://api.telegram.org/' . $key . '/getUpdates', '');
+            return  $this->getTelegram('https://api.telegram.org/' . $key . '/sendMessage', '?chat_id=' . $chat_id . '&text=' . $text);
         }
     }
 }
